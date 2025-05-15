@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   // DOM Elements
+  
   const menuScreen = document.getElementById("menuScreen");
   const gameScreen = document.getElementById("gameScreen");
   const resultScreen = document.getElementById("resultScreen");
@@ -25,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   // Game state
+  let firstPlayer = "X";
   let board = ["", "", "", "", "", "", "", "", ""];
   let currentPlayer = "X";
   let gameActive = true;
@@ -170,13 +172,16 @@ document.addEventListener("DOMContentLoaded", () => {
     scores = { X: 0, O: 0 };
     updateScoreDisplay();
 
-    // Initialize game
+    // Initialize game with alternating first player
     resetBoard();
-    currentPlayer = "X";
-    currentPlayerName.textContent = player1;
-    currentPlayerName.className = "neon-text x-symbol";
-    currentPlayerName.style.color = colorX;
-    currentPlayerName.style.textShadow = `0 0 10px ${colorX}, 0 0 20px ${colorX}`;
+    currentPlayer = firstPlayer; // Use the stored firstPlayer value
+    currentPlayerName.textContent = currentPlayer === "X" ? player1 : player2;
+    currentPlayerName.className =
+      "neon-text " + (currentPlayer === "X" ? "x-symbol" : "o-symbol");
+    currentPlayerName.style.color = currentPlayer === "X" ? colorX : colorO;
+    currentPlayerName.style.textShadow = `0 0 10px ${
+      currentPlayer === "X" ? colorX : colorO
+    }, 0 0 20px ${currentPlayer === "X" ? colorX : colorO}`;
 
     // Show game screen
     menuScreen.style.display = "none";
@@ -198,13 +203,18 @@ document.addEventListener("DOMContentLoaded", () => {
     if (gameMode === "bestOf5") {
       round = 1;
       roundInfo.textContent = `Round ${round} of ${maxRounds}`;
+      // Reset first player to X when completely restarting
+      firstPlayer = "X";
     }
     resetBoard();
-    currentPlayer = "X";
-    currentPlayerName.textContent = player1;
-    currentPlayerName.className = "neon-text x-symbol";
-    currentPlayerName.style.color = colorX;
-    currentPlayerName.style.textShadow = `0 0 10px ${colorX}, 0 0 20px ${colorX}`;
+    currentPlayer = firstPlayer;
+    currentPlayerName.textContent = currentPlayer === "X" ? player1 : player2;
+    currentPlayerName.className =
+      "neon-text " + (currentPlayer === "X" ? "x-symbol" : "o-symbol");
+    currentPlayerName.style.color = currentPlayer === "X" ? colorX : colorO;
+    currentPlayerName.style.textShadow = `0 0 10px ${
+      currentPlayer === "X" ? colorX : colorO
+    }, 0 0 20px ${currentPlayer === "X" ? colorX : colorO}`;
   }
 
   // Show game result
@@ -225,14 +235,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Proceed to next round
   function nextRound() {
+    // Alternate who starts first
+    firstPlayer = firstPlayer === "X" ? "O" : "X";
+
     round++;
     roundInfo.textContent = `Round ${round} of ${maxRounds}`;
     resetBoard();
-    currentPlayer = "X";
-    currentPlayerName.textContent = player1;
-    currentPlayerName.className = "neon-text x-symbol";
-    currentPlayerName.style.color = colorX;
-    currentPlayerName.style.textShadow = `0 0 10px ${colorX}, 0 0 20px ${colorX}`;
+    currentPlayer = firstPlayer; // Use the new firstPlayer value
+    currentPlayerName.textContent = currentPlayer === "X" ? player1 : player2;
+    currentPlayerName.className =
+      "neon-text " + (currentPlayer === "X" ? "x-symbol" : "o-symbol");
+    currentPlayerName.style.color = currentPlayer === "X" ? colorX : colorO;
+    currentPlayerName.style.textShadow = `0 0 10px ${
+      currentPlayer === "X" ? colorX : colorO
+    }, 0 0 20px ${currentPlayer === "X" ? colorX : colorO}`;
 
     gameScreen.style.display = "block";
     resultScreen.style.display = "none";
