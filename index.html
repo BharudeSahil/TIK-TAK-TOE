@@ -33,8 +33,25 @@
             
             <div class="game-modes">
                 <h2 class="neon-subtitle">SELECT GAME MODE</h2>
-                <button id="casualMode" class="neon-button">CASUAL MATCH</button>
-                <button id="bestOfFiveMode" class="neon-button">BEST OF 5</button>
+                
+                <!-- Player vs Player Section -->
+                <div class="mode-section">
+                    <h3 class="neon-subtitle">PLAY WITH FRIENDS</h3>
+                    <button id="casualMode" class="neon-button">CASUAL MATCH</button>
+                    <button id="bestOfFiveMode" class="neon-button">BEST OF 5</button>
+                </div>
+                
+                <!-- Player vs Computer Section -->
+                <div class="mode-section">
+                    <h3 class="neon-subtitle">PLAY WITH COMPUTER</h3>
+                    <button id="vsComputerMode" class="neon-button">SINGLE GAME</button>
+                    <div id="difficultyOptions" style="display: none; margin-top: 15px;">
+                        <h4 class="neon-subtitle">SELECT DIFFICULTY</h4>
+                        <button class="difficulty-btn neon-button" data-difficulty="easy">Easy</button>
+                        <button class="difficulty-btn neon-button" data-difficulty="medium">Medium</button>
+                        <button class="difficulty-btn neon-button" data-difficulty="hard">Hard</button>
+                    </div>
+                </div>
             </div>
             
             <div class="leaderboards">

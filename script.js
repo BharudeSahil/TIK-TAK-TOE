@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   // DOM Elements
-  
+
   const menuScreen = document.getElementById("menuScreen");
   const gameScreen = document.getElementById("gameScreen");
   const resultScreen = document.getElementById("resultScreen");
@@ -26,6 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   // Game state
+  let vsComputer = false;
+  let computerDifficulty = "medium";
+  let computerSymbol = "O";
   let firstPlayer = "X";
   let board = ["", "", "", "", "", "", "", "", ""];
   let currentPlayer = "X";
@@ -53,6 +56,20 @@ document.addEventListener("DOMContentLoaded", () => {
   finishGameBtn.addEventListener("click", finishGame);
   colorXInput.addEventListener("input", updateColors);
   colorOInput.addEventListener("input", updateColors);
+  // Event listeners for game modes
+  vsComputerMode.addEventListener("click", () => {
+    document.getElementById("difficultyOptions").style.display = "block";
+  });
+
+  document.querySelectorAll(".difficulty-btn").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      computerDifficulty = e.target.dataset.difficulty;
+      vsComputer = true;
+      computerSymbol = "O";
+      startGame("casual");
+      document.getElementById("difficultyOptions").style.display = "none";
+    });
+  });
 
   // Initialize the game board
   function initializeBoard() {
@@ -147,15 +164,19 @@ document.addEventListener("DOMContentLoaded", () => {
       currentPlayerName.style.color = colorO;
       currentPlayerName.style.textShadow = `0 0 10px ${colorO}, 0 0 20px ${colorO}`;
     }
+
+    if (vsComputer && gameActive && currentPlayer === computerSymbol) {
+      computerMove();
+    }
   }
 
   // Start a new game
   function startGame(mode) {
     // Get player names and colors
     player1 = player1Input.value || "Player 1";
-    player2 = player2Input.value || "Player 2";
+    player2 = vsComputer ? "Computer" : player2Input.value || "Player 2";
     colorX = colorXInput.value;
-    colorO = colorOInput.value;
+    colorO = vsComputer ? "#00ffff" : colorOInput.value;
 
     // Set game mode
     gameMode = mode;
@@ -187,6 +208,92 @@ document.addEventListener("DOMContentLoaded", () => {
     menuScreen.style.display = "none";
     gameScreen.style.display = "block";
     resultScreen.style.display = "none";
+
+    if (vsComputer && currentPlayer === computerSymbol) {
+      computerMove();
+    }
+  }
+
+  // Computer AI logic
+  function computerMove() {
+    if (!gameActive || currentPlayer !== computerSymbol) return;
+
+    currentPlayerName.textContent = "Computer is thinking";
+    currentPlayerName.classList.add("thinking");
+
+    setTimeout(() => {
+      currentPlayerName.classList.remove("thinking");
+
+      let moveIndex;
+      const availableMoves = board
+        .map((cell, index) => (cell === "" ? index : null))
+        .filter((val) => val !== null);
+
+      if (computerDifficulty === "easy") {
+        moveIndex =
+          availableMoves[Math.floor(Math.random() * availableMoves.length)];
+      } else if (computerDifficulty === "medium") {
+        if (Math.random() > 0.5) {
+          moveIndex =
+            findWinningMove(computerSymbol) ||
+            findWinningMove(currentPlayer === "X" ? "O" : "X") ||
+            availableMoves[Math.floor(Math.random() * availableMoves.length)];
+        } else {
+          moveIndex =
+            availableMoves[Math.floor(Math.random() * availableMoves.length)];
+        }
+      } else {
+        moveIndex =
+          findWinningMove(computerSymbol) ||
+          findWinningMove(currentPlayer === "X" ? "O" : "X") ||
+          findCornerMove() ||
+          findCenterMove() ||
+          availableMoves[Math.floor(Math.random() * availableMoves.length)];
+      }
+
+      if (moveIndex !== undefined) {
+        const cell = document.querySelector(`.cell[data-index="${moveIndex}"]`);
+        cell.click();
+      }
+    }, 1000);
+  }
+
+  // AI helper functions
+  function findWinningMove(symbol) {
+    const winPatterns = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+
+    for (let pattern of winPatterns) {
+      const [a, b, c] = pattern;
+      if (board[a] === symbol && board[b] === symbol && board[c] === "")
+        return c;
+      if (board[a] === symbol && board[c] === symbol && board[b] === "")
+        return b;
+      if (board[b] === symbol && board[c] === symbol && board[a] === "")
+        return a;
+    }
+    return null;
+  }
+
+  function findCornerMove() {
+    const corners = [0, 2, 6, 8];
+    const emptyCorners = corners.filter((index) => board[index] === "");
+    if (emptyCorners.length > 0) {
+      return emptyCorners[Math.floor(Math.random() * emptyCorners.length)];
+    }
+    return null;
+  }
+
+  function findCenterMove() {
+    return board[4] === "" ? 4 : null;
   }
 
   // Reset the game board
@@ -215,6 +322,10 @@ document.addEventListener("DOMContentLoaded", () => {
     currentPlayerName.style.textShadow = `0 0 10px ${
       currentPlayer === "X" ? colorX : colorO
     }, 0 0 20px ${currentPlayer === "X" ? colorX : colorO}`;
+
+    if (vsComputer && currentPlayer === computerSymbol) {
+      computerMove();
+    }
   }
 
   // Show game result
