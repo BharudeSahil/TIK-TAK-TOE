@@ -1,0 +1,239 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Orbitron', sans-serif;
+}
+
+body {
+    background-color: #121212;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.neon-title {
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px red, 0 0 40px red;
+    margin-bottom: 30px;
+    font-size: 3rem;
+}
+
+.neon-subtitle {
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff;
+    margin: 20px 0;
+    font-size: 1.5rem;
+}
+
+.neon-text {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff;
+}
+
+.menu-screen, .game-screen, .result-screen {
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.player-input {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.player-box {
+    background-color: #2a2a2a;
+    padding: 20px;
+    border-radius: 8px;
+    width: 45%;
+    min-width: 300px;
+    margin: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.player-box label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.neon-input {
+    background-color: #333;
+    border: 1px solid #444;
+    color: #fff;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.neon-input:focus {
+    outline: none;
+    border-color: #00ffff;
+    box-shadow: 0 0 10px #00ffff;
+}
+
+.color-picker {
+    display: flex;
+    align-items: center;
+}
+
+.color-picker span {
+    margin-right: 10px;
+}
+
+.game-modes {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.neon-button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 12px 25px;
+    margin: 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.neon-button:hover {
+    background-color: #444;
+    box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+}
+
+.leaderboards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.leaderboard {
+    background-color: #2a2a2a;
+    padding: 20px;
+    border-radius: 8px;
+    width: 45%;
+    min-width: 300px;
+    margin: 10px;
+}
+
+.leaderboard-list {
+    list-style-type: none;
+}
+
+.leaderboard-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #444;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 0 20px;
+}
+
+.player-info {
+    font-size: 1.2rem;
+}
+
+.score-display {
+    display: flex;
+    gap: 20px;
+}
+
+.score {
+    font-size: 1.2rem;
+}
+
+.round-info {
+    font-size: 1.2rem;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+}
+
+.cell {
+    background-color: #2a2a2a;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.cell:hover {
+    background-color: #333;
+}
+
+.game-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 20px;
+}
+
+.result-screen {
+    text-align: center;
+}
+
+.result-screen button {
+    margin: 10px;
+}
+
+/* Neon effects for X and O */
+.x-symbol {
+    color: #ff00ff;
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+}
+
+.o-symbol {
+    color: #00ffff;
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .player-input, .leaderboards {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .player-box, .leaderboard {
+        width: 100%;
+    }
+    
+    .neon-title {
+        font-size: 2rem;
+    }
+}

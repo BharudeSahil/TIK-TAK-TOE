@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Tic Tac Toe</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="menu-screen" id="menuScreen">
+            <h1 class="neon-title">TIC TAC TOE</h1>
+            
+            <div class="player-input">
+                <div class="player-box">
+                    <label for="player1">Player 1 (X):</label>
+                    <input type="text" id="player1" placeholder="Player 1" class="neon-input">
+                    <div class="color-picker">
+                        <span>Color:</span>
+                        <input type="color" id="colorX" value="#ff00ff">
+                    </div>
+                </div>
+                <div class="player-box">
+                    <label for="player2">Player 2 (O):</label>
+                    <input type="text" id="player2" placeholder="Player 2" class="neon-input">
+                    <div class="color-picker">
+                        <span>Color:</span>
+                        <input type="color" id="colorO" value="#00ffff">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="game-modes">
+                <h2 class="neon-subtitle">SELECT GAME MODE</h2>
+                <button id="casualMode" class="neon-button">CASUAL MATCH</button>
+                <button id="bestOfFiveMode" class="neon-button">BEST OF 5</button>
+            </div>
+            
+            <div class="leaderboards">
+                <div class="leaderboard">
+                    <h3 class="neon-subtitle">CASUAL LEADERBOARD</h3>
+                    <ol id="casualLeaderboard" class="leaderboard-list"></ol>
+                </div>
+                <div class="leaderboard">
+                    <h3 class="neon-subtitle">BEST OF 5 LEADERBOARD</h3>
+                    <ol id="bestOfFiveLeaderboard" class="leaderboard-list"></ol>
+                </div>
+            </div>
+        </div>
+        
+        <div class="game-screen" id="gameScreen" style="display: none;">
+            <div class="game-header">
+                <div class="player-info">
+                    <span id="currentPlayerName" class="neon-text"></span>'s Turn
+                </div>
+                <div class="score-display">
+                    <div class="score" id="player1Score">X: 0</div>
+                    <div class="score" id="player2Score">O: 0</div>
+                </div>
+                <div class="round-info" id="roundInfo"></div>
+            </div>
+            
+            <div class="game-board" id="gameBoard"></div>
+            
+            <div class="game-footer">
+                <button id="backToMenu" class="neon-button">BACK TO MENU</button>
+                <button id="restartGame" class="neon-button">RESTART</button>
+            </div>
+        </div>
+        
+        <div class="result-screen" id="resultScreen" style="display: none;">
+            <h2 id="resultText" class="neon-title"></h2>
+            <button id="nextRound" class="neon-button">NEXT ROUND</button>
+            <button id="finishGame" class="neon-button">FINISH GAME</button>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
