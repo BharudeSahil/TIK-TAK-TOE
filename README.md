@@ -64,8 +64,10 @@ TIK-TAK-TOE/
 
 ## 📸 Screenshots
 
-> *(You can add terminal screenshots or gameplay GIFs here for visual appeal)*
-
+### HomePage
+> ![Home Page](image.png)
+> ![Game](image-1.png)
+> ![LeaderBoard](image-2.png)
 ---
 
 ## 🤝 Contributing
